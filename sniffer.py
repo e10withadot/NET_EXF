@@ -1,5 +1,5 @@
 '''
-Packet sniffer. Sniffs packets to get IP, TCP, and TLS headers, packet inter-arrivals, flow size, and flow volume.
+Packet sniffer. Sniffs packets to get IP, TCP, and TLS headers.
 '''
 import csv
 import scapy.all as scapy
@@ -64,11 +64,7 @@ class PacketSniffer:
                         "TCP Options",
                         "Content Type",
                         "TLS Version",
-                        "TLS Header Length",
-                        "IV",
-                        "MAC",
-                        "TLS Padding",
-                        "TLS Padding Length"
+                        "TLS Header Length"
                     ])
                 # row for current packet
                 writer.writerow([
@@ -77,7 +73,7 @@ class PacketSniffer:
                     packet[IP].version,
                     packet[IP].ihl,
                     packet[IP].tos,
-                    packet[IP].len,
+                    len(packet[IP]),
                     packet[IP].id,
                     packet[IP].flags,
                     packet[IP].frag,
@@ -100,11 +96,7 @@ class PacketSniffer:
                     packet[TCP].options,
                     packet[TLS].type,
                     packet[TLS].version,
-                    packet[TLS].len,
-                    packet[TLS].iv,
-                    packet[TLS].mac,
-                    packet[TLS].pad,
-                    packet[TLS].padlen
+                    packet[TLS].len
                 ])
             # increase packet no
             self.packet_no+=1
