@@ -33,7 +33,7 @@ Sniffs TCP packets and extracts the following information into a `packets.csv` f
 ### `plotter.py`
 Creates plots based on the information given in the `packets.csv` file. You can choose any field from the csv file, and have it generate a bar graph in relation with the number of packets that include that field.
 ## Running the Python scripts
-### Dependancies
+### Dependencies
 - `sniffer.py` uses `scapy` for packet sniffing.
 - `plotter.py` uses `matplotlib` for graph plotting.
 Both can be installed with:
