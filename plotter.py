@@ -2,11 +2,6 @@ from collections import defaultdict
 import csv
 import matplotlib.pyplot as plot
 
-pkt_sizes: dict[str, int] = {}
-ttls: dict[str, int] = {}
-win_sizes: dict[str, int] = {}
-tls_vers: dict[str, int] = {}
-
 # ADD FIELDS HERE
 fields = [
     "Packet Size",
