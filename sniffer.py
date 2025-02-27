@@ -104,16 +104,20 @@ class PacketSniffer:
             self.packet_no+=1
 
     def run(self, iface: str):
-        try:
-            scapy.sniff(iface= iface, prn= lambda pkt: self.write_to_file(pkt), store= 0)
-        except KeyboardInterrupt:
-            # finish
-            print("Done.")
+        scapy.sniff(iface= iface, prn= lambda pkt: self.write_to_file(pkt), store= 0)
+        
 # get interface
 if_list = scapy.get_if_list()
 options = '\n'.join([f'\t({i}) {if_name}' for i, if_name in enumerate(if_list)])
-c= int(input(f'Which interface would you like to use?\n{options}\n'))
+try:
+    c= int(input(f'Which interface would you like to use? (Ctrl + C to quit)\n{options}\n'))
+except KeyboardInterrupt:
+    print('\nOperation Cancelled.')
+    exit()
 # run packet sniffer
 sniffer = PacketSniffer()
-print("Started packet sniffing. Ctrl + C to quit.")
-sniffer.run(if_list[c])
+print("Started packet sniffing. (Ctrl + C to quit)")
+try:
+    sniffer.run(if_list[c])
+except KeyboardInterrupt:
+    exit()
