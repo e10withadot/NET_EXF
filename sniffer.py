@@ -5,7 +5,6 @@ import csv
 import scapy.all as scapy
 from scapy.layers.tls.all import TLS
 from scapy.layers.inet import IP, TCP
-from scapy.sessions import TCPSession
 
 def file_is_empty(filename: str) -> bool:
     '''
@@ -21,6 +20,9 @@ def file_is_empty(filename: str) -> bool:
         return True
 
 class PacketSniffer:
+    '''
+    Interface for packet sniffing.
+    '''
     def __init__(self):
         self.packet_no: int = 0
     
@@ -101,13 +103,17 @@ class PacketSniffer:
             # increase packet no
             self.packet_no+=1
 
-    def run(self):
+    def run(self, iface: str):
         try:
-            scapy.sniff(session= TCPSession, iface= "eth0", prn= lambda pkt: self.write_to_file(pkt), store= 0)
+            scapy.sniff(iface= iface, prn= lambda pkt: self.write_to_file(pkt), store= 0)
         except KeyboardInterrupt:
             # finish
             print("Done.")
-
+# get interface
+if_list = scapy.get_if_list()
+options = '\n'.join([f'\t({i}) {if_name}' for i, if_name in enumerate(if_list)])
+c= int(input(f'Which interface would you like to use?\n{options}\n'))
+# run packet sniffer
 sniffer = PacketSniffer()
 print("Started packet sniffing. Ctrl + C to quit.")
-sniffer.run()
+sniffer.run(if_list[c])

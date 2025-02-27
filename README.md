@@ -1,7 +1,7 @@
 # Python Scripts
 ## Explanation
 ### `sniffer.py`
-Sniffs TCP packets and extracts the following information into a `packets.csv` file:
+Sniffs TCP packets from the selected interface and extracts the following information into a `packets.csv` file:
 - **Packet Size**
 - **IP Version**
 - **Internet Header Length (IHL)**
@@ -36,9 +36,10 @@ Creates plots based on the information given in the `packets.csv` file. You can 
 ### Dependencies
 - `sniffer.py` uses `scapy` for packet sniffing.
 - `plotter.py` uses `matplotlib` for graph plotting.
+
 Both can be installed with:
 ```bash
-python -m pip install <package>
+python -m pip install [package]
 ```
 ### How to run
 #### `sniffer.py`
