@@ -40,7 +40,7 @@ try:
     xlabel= fields[c]
     map = field_map[xlabel]
     # generate plot
-    plot.bar(map.keys(), map.values())
+    plot.bar(map.keys(), sorted(map.values(), reverse=True))
     plot.title(f'{xlabel} in relation to amount')
     plot.xlabel(xlabel)
     plot.ylabel('Amount')
