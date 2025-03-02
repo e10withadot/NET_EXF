@@ -44,9 +44,10 @@ python -m pip install [package]
 ### How to run
 #### `sniffer.py`
 ```bash
-sudo python sniffer.py
+sudo python3 sniffer.py
 ```
 #### `plotter.py`
 ```bash
-python plotter.py
+python3 plotter.py
 ```
+###### if 'python3' doesn't work, use 'python'
