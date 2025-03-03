@@ -68,38 +68,56 @@ class PacketSniffer:
                         "TLS Version",
                         "TLS Header Length"
                     ])
-                # row for current packet
-                writer.writerow([
+                r_list= [
                     self.packet_no,
-                    len(packet),
-                    packet[IP].version,
-                    packet[IP].ihl,
-                    packet[IP].tos,
-                    len(packet[IP]),
-                    packet[IP].id,
-                    packet[IP].flags,
-                    packet[IP].frag,
-                    packet[IP].ttl,
-                    packet[IP].proto,
-                    packet[IP].chksum,
-                    packet[IP].src,
-                    packet[IP].dst,
-                    packet[IP].options,
-                    packet[TCP].sport,
-                    packet[TCP].dport,
-                    packet[TCP].seq,
-                    packet[TCP].ack,
-                    packet[TCP].dataofs,
-                    packet[TCP].reserved,
-                    packet[TCP].flags,
-                    packet[TCP].window,
-                    packet[TCP].chksum,
-                    packet[TCP].urgptr,
-                    packet[TCP].options,
-                    packet[TLS].type,
-                    packet[TLS].version,
-                    packet[TLS].len
-                ])
+                    len(packet), 
+                ]
+                # find IP headers
+                try:
+                    r_list.extend([
+                        packet[IP].version,
+                        packet[IP].ihl,
+                        packet[IP].tos,
+                        len(packet[IP]),
+                        packet[IP].id,
+                        packet[IP].flags,
+                        packet[IP].frag,
+                        packet[IP].ttl,
+                        packet[IP].proto,
+                        packet[IP].chksum,
+                        packet[IP].src,
+                        packet[IP].dst,
+                        packet[IP].options,
+                    ])
+                except:
+                    raise OSError('Could not find IP header.')
+                # find TCP headers
+                try:
+                    r_list.extend([
+                        packet[TCP].sport,
+                        packet[TCP].dport,
+                        packet[TCP].seq,
+                        packet[TCP].ack,
+                        packet[TCP].dataofs,
+                        packet[TCP].reserved,
+                        packet[TCP].flags,
+                        packet[TCP].window,
+                        packet[TCP].chksum,
+                        packet[TCP].urgptr,
+                        packet[TCP].options,
+                    ])
+                except:
+                    raise OSError('Could not find TCP header.')
+                try:
+                    r_list.extend([
+                        packet[TLS].type,
+                        packet[TLS].version,
+                        packet[TLS].len
+                    ])
+                except:
+                    raise OSError('Could not find TLS header.')
+                # row for current packet
+                writer.writerow(r_list)
             # increase packet no
             self.packet_no+=1
 
