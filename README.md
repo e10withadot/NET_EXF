@@ -37,7 +37,7 @@ Creates plots based on the information given in the `packets.csv` file. You can 
 - `sniffer.py` uses `scapy` for packet sniffing.
 - `plotter.py` uses `matplotlib` for graph plotting.
 
-Both can be installed with:
+Both can be installed with :
 ```bash
 python -m pip install [package]
 ```
