@@ -1,7 +1,7 @@
 # Python Scripts
 ## Explanation
 ### `sniffer.py`
-Sniffs TCP packets from the selected interface and extracts the following information into a `packets.csv` file:
+Sniffs TCP packets from the selected interface and extracts the following information into a "packets.csv" file:
 - **Packet Size**
 - **IP Version**
 - **Internet Header Length (IHL)**
