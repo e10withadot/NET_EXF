@@ -1,7 +1,10 @@
+# Project Summary
+This is our final assignment for the Communication Networks course in Ariel University. It includes answers to questions about the Internet Layer, Transport Layer, and Application Layer. It also summarizes 3 articles concerning improving and iterating on these technologies, and an analysis of internet traffic with graphs, which use the Python scripts in this repository.
 # Python Scripts
 ## Explanation
 ### `sniffer.py`
-Sniffs TCP packets from the selected interface and extracts the following information into a 'packets.csv' file:
+Sniffs TCP packets from the selected interface and extracts the following fields into a 'packets.csv' file:
+- **Packet No.**
 - **Packet Size**
 - **IP Version**
 - **Internet Header Length (IHL)**
@@ -30,6 +33,7 @@ Sniffs TCP packets from the selected interface and extracts the following inform
 - **Content Type**
 - **TLS Version**
 - **TLS Header Length**
+###### If you want to record packets for different actions separately, please delete or move the existing `packets.csv` file before sniffing. If you don't do this, the new packet information will append to the end of the existing file.
 ### `plotter.py`
 Creates plots based on the information given in the `packets.csv` file. You can choose any field from the csv file, and have it generate a bar graph in relation with the number of packets that include that field.
 ## Running the Python scripts
@@ -39,7 +43,7 @@ Creates plots based on the information given in the `packets.csv` file. You can 
 
 Both can be installed with :
 ```bash
-python -m pip install [package]
+python3 -m pip install [package]
 ```
 ### How to run
 #### `sniffer.py`
@@ -50,4 +54,4 @@ sudo python3 sniffer.py
 ```bash
 python3 plotter.py
 ```
-###### if 'python3' doesn't work, use 'python'
+###### If 'python3' doesn't work, use 'python'
